@@ -12,12 +12,14 @@ import java.util.Properties;
 @RestController
 @RequestMapping("/")
 public class HealthCheckController {
+
     @GetMapping("version")
     public ResponseEntity<String> status() throws IOException {
 
         Properties properties = new Properties();
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("application.yaml");
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("application.yml");
         properties.load(inputStream);
+
         return ResponseEntity.ok(properties.getProperty("build.name") + " - " + properties.getProperty("build.version"));
     }
 }
